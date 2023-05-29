@@ -1,37 +1,53 @@
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <title>NGINX on Railway</title>
-    <meta name="description" content="Choo Choo!" />
-
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link rel="stylesheet" href="/styles.css?v=1.0" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document APP 2</title>
   </head>
-
   <body>
-    <main>
-      <img
-        src="https://railway.app/brand/logo-light.svg"
-        alt="Railway logo"
-        class="logo"
-      />
-
-      <h1>NGINX on Railway</h1>
-
-      <p>
-        Choo Choo! This is an example of an NGINX static site running on
-        Railway.
-        <a
-          href="https://github.com/railwayapp/starters/tree/master/examples/nginx"
-          >View source</a
-        >.
-      </p>
-    </main>
-
-    <script src="/script.js"></script>
+    <button onclick="login()">login</button>
+    <button onclick="test()">test</button>
+    <button onclick="test2()">test2</button>
   </body>
+  <script>
+    function login() {
+        console.log('clicj login')
+        var r = new XMLHttpRequest();
+        r.open("POST", "https://demo-cookie-service-production.up.railway.app/login", true);
+        r.withCredentials = true
+        r.onreadystatechange = function () {
+            console.log(r.readyState, r.status, document.cookie)
+          if (r.readyState != 4 || r.status != 200) return;
+          alert("Success: " + r.responseText + document.cookie);
+        };
+        r.send()
+    }
+    function test() {
+        console.log('clicj test')
+        var r = new XMLHttpRequest();
+        r.open("GET", "https://demo-cookie-service-production.up.railway.app", true);
+        r.withCredentials = true
+        r.onreadystatechange = function () {
+            console.log(r.readyState, r.status)
+          if (r.readyState != 4 || r.status != 200) return;
+          alert("Success: " + r.responseText);
+        };
+        r.send()
+    }
+    function test2() {
+        console.log('clicj test2')
+        var r = new XMLHttpRequest();
+        r.open("GET", "https://demo-cookie-service-production.up.railway.app/h2", true);
+        r.withCredentials = true
+        r.onreadystatechange = function () {
+            console.log(r.readyState, r.status)
+          if (r.readyState != 4 || r.status != 200) return;
+          alert("Success: " + r.responseText);
+        };
+        r.send()
+    }
+    
+  </script>
 </html>
